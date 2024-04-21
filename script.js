@@ -5,12 +5,14 @@ var firstNum = 0;
 
 var secondNum = 0;
 
-var operator;
+var operator = undefined;
 
-var secondOperator;
+var secondOperator = undefined;
+
+var i = null;
 
 function add(a, b) {
-    if (secondOperator = undefined) {
+    if (secondOperator == undefined) {
         display.textContent = parseInt(a) + parseInt(b);
         operator = undefined;
         console.log(operator)
@@ -23,11 +25,12 @@ function add(a, b) {
         operator = secondOperator;
         secondNum = 0;
         secondOperator = undefined;
+        i = true;
     }
 }
 
 function subtract(a , b) {
-    if (secondOperator = undefined) {
+    if (secondOperator == undefined) {
         display.textContent = parseInt(a) - parseInt(b);
         operator = undefined;
         console.log(operator)
@@ -38,13 +41,15 @@ function subtract(a , b) {
         display.textContent = parseInt(a) - parseInt(b);
         firstNum = display.textContent;
         operator = secondOperator;
+        console.log(operator);
         secondNum = 0;
         secondOperator = undefined;
+        i = true;
     }
 }
 
 function multiply(a, b) {
-    if (secondOperator = undefined) {
+    if (secondOperator == undefined) {
         display.textContent = parseInt(a) * parseInt(b);
         operator = undefined;
         console.log(operator)
@@ -57,11 +62,12 @@ function multiply(a, b) {
         operator = secondOperator;
         secondNum = 0;
         secondOperator = undefined;
+        i = true;
     }
 }
 
 function divide(a, b) {
-    if (secondOperator = undefined) {
+    if (secondOperator == undefined) {
         display.textContent = parseInt(a) / parseInt(b);
         operator = undefined;
         console.log(operator)
@@ -74,6 +80,7 @@ function divide(a, b) {
         operator = secondOperator;
         secondNum = 0;
         secondOperator = undefined;
+        i = true;
     }
 }
 
@@ -84,7 +91,7 @@ function operate(num1, num2) {
     else if (operator == "subtract") {
         subtract(num1, num2);
     }
-    else if (operator == "mulitply") {
+    else if (operator == "multiply") {
         multiply(num1, num2);
     }
     else if (operator == "divide") {
@@ -98,11 +105,13 @@ numButtons.forEach(button => {
 })
 function numClick(event) {
     if (operator == undefined) {
-        display.textContent += event.target.textContent;
+    display.textContent += event.target.textContent;
     }
     else {
-        secondOperator = operator;
-        display.textContent = '';
+        if (i == true) {
+            display.textContent = '';
+        }
+        i = false;
         display.textContent += event.target.textContent;
     }
 }
@@ -119,6 +128,7 @@ function operatorClick(event) {
     }
     else {
         secondOperator = event.target.id;
+        console.log(secondOperator);
         secondNum = display.textContent;
         operate(firstNum, secondNum);
     }
@@ -127,6 +137,19 @@ function operatorClick(event) {
 const equalOperator = document.querySelector("#equal");
 equalOperator.addEventListener("click", () => {
     secondNum = display.textContent;
+    console.log(firstNum);
+    console.log(secondNum);
+    console.log(operator);
+    // all variables are being stored correctly
+    // operate is not working, this seems to be the bug
     operate(firstNum, secondNum);
-    // debugger
-})
+});
+
+const clearButton = document.querySelector("#clear");
+clearButton.addEventListener("click", () => {
+    display.textContent = '';
+    firstNum = 0;
+    secondNum = 0;
+    operator = undefined;
+    secondOperator =  undefined;
+});
