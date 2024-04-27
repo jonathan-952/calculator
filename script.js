@@ -1,9 +1,9 @@
 const display = document.querySelector(".display");
 display.textContent = '';
 
-var firstNum = 0;
+var firstNum = null;
 
-var secondNum = 0;
+var secondNum = null;
 
 var operator = undefined;
 
@@ -13,17 +13,17 @@ var i = null;
 
 function add(a, b) {
     if (secondOperator == undefined) {
-        display.textContent = parseInt(a) + parseInt(b);
+        display.textContent = Math.round((parseFloat(a) + parseFloat(b))*10000000)/10000000;
         operator = undefined;
         console.log(operator)
         firstNum = display.textContent;
-        secondNum = 0;
+        secondNum = null;
     }
     else {
-        display.textContent = parseInt(a) + parseInt(b);
+        display.textContent = Math.round((parseFloat(a) + parseFloat(b))*10000000)/10000000;
         firstNum = display.textContent;
         operator = secondOperator;
-        secondNum = 0;
+        secondNum = null;
         secondOperator = undefined;
         i = true;
     }
@@ -31,18 +31,18 @@ function add(a, b) {
 
 function subtract(a , b) {
     if (secondOperator == undefined) {
-        display.textContent = parseInt(a) - parseInt(b);
+        display.textContent = Math.round((parseFloat(a) - parseFloat(b))*10000000)/10000000;
         operator = undefined;
         console.log(operator)
         firstNum = display.textContent;
-        secondNum = 0;
+        secondNum = null;
     }
     else {
-        display.textContent = parseInt(a) - parseInt(b);
+        display.textContent = Math.round((parseFloat(a) - parseFloat(b))*10000000)/10000000;
         firstNum = display.textContent;
         operator = secondOperator;
         console.log(operator);
-        secondNum = 0;
+        secondNum = null;
         secondOperator = undefined;
         i = true;
     }
@@ -50,37 +50,42 @@ function subtract(a , b) {
 
 function multiply(a, b) {
     if (secondOperator == undefined) {
-        display.textContent = parseInt(a) * parseInt(b);
+        display.textContent = Math.round((parseFloat(a) * parseFloat(b))*10000000)/10000000;
         operator = undefined;
         console.log(operator)
         firstNum = display.textContent;
-        secondNum = 0;
+        secondNum = null;
     }
     else {
-        display.textContent = parseInt(a) * parseInt(b);
+        display.textContent = Math.round((parseFloat(a) * parseFloat(b))*10000000)/10000000;
         firstNum = display.textContent;
         operator = secondOperator;
-        secondNum = 0;
+        secondNum = null;
         secondOperator = undefined;
         i = true;
     }
 }
 
 function divide(a, b) {
-    if (secondOperator == undefined) {
-        display.textContent = parseInt(a) / parseInt(b);
-        operator = undefined;
-        console.log(operator)
-        firstNum = display.textContent;
-        secondNum = 0;
+    if (parseInt(b) == 0) {
+        display.textContent = "ERROR";
     }
     else {
-        display.textContent = parseInt(a) / parseInt(b);
-        firstNum = display.textContent;
-        operator = secondOperator;
-        secondNum = 0;
-        secondOperator = undefined;
-        i = true;
+        if (secondOperator == undefined) {
+            display.textContent = Math.round((parseFloat(a) / parseFloat(b))*10000000)/10000000;
+            operator = undefined;
+            console.log(operator)
+            firstNum = display.textContent;
+            secondNum = null;
+        }
+        else {
+            display.textContent = Math.round((parseFloat(a) / parseFloat(b))*10000000)/10000000;
+            firstNum = display.textContent;
+            operator = secondOperator;
+            secondNum = null;
+            secondOperator = undefined;
+            i = true;
+        }
     }
 }
 
@@ -104,6 +109,14 @@ numButtons.forEach(button => {
     button.addEventListener("click", numClick);
 })
 function numClick(event) {
+    if (display.textContent == "ERROR") {
+        display.textContent = '';
+        firstNum = null;
+        secondNum = null;
+        operator = undefined;
+        secondOperator =  undefined;
+    }
+
     if (operator == undefined) {
     display.textContent += event.target.textContent;
     }
@@ -136,20 +149,44 @@ function operatorClick(event) {
 
 const equalOperator = document.querySelector("#equal");
 equalOperator.addEventListener("click", () => {
-    secondNum = display.textContent;
-    console.log(firstNum);
-    console.log(secondNum);
-    console.log(operator);
-    // all variables are being stored correctly
-    // operate is not working, this seems to be the bug
-    operate(firstNum, secondNum);
+    if ((operator !== undefined) && (firstNum !== null) && (display.textContent !== '')) {
+        secondNum = display.textContent;
+        operate(firstNum, secondNum);
+    }
 });
 
 const clearButton = document.querySelector("#clear");
 clearButton.addEventListener("click", () => {
     display.textContent = '';
-    firstNum = 0;
-    secondNum = 0;
+    firstNum = null;
+    secondNum = null;
     operator = undefined;
     secondOperator =  undefined;
 });
+
+// const backSpaceButton = document.querySelector("#backspace")
+// backSpaceButton.addEventListener("click", () => {
+//     let arr = display.textContent.split('');
+//     arr.pop();
+//     display.textContent = arr.join("");
+// });
+
+const decimalButton = document.querySelector("#decimal");
+decimalButton.addEventListener("click", (event) => {
+    let arr = display.textContent.split('');
+    if (arr.includes(".") == false) {
+        display.textContent += event.target.textContent;
+    }
+});
+
+const percentButton = document.querySelector("#percent");
+percentButton.addEventListener("click", () => {
+    display.textContent = Math.round((parseFloat(display.textContent) * .01) * 10000000) / 10000000;
+})
+
+const signButton = document.querySelector("#sign");
+signButton.addEventListener("click", () => {
+    if (display.textContent !== '') {
+        display.textContent *= -1;
+    } 
+})

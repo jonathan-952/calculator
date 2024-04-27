@@ -6,24 +6,40 @@
         <link rel = "stylesheet" href = "styles.css">
     </head>
     <body>
-        <p class = "display"></p>
-        <button class = "number">0</button>
-        <button class = "number">1</button>
-        <button class = "number">2</button>
-        <button class = "number">3</button>
-        <button class = "number">4</button>
-        <button class = "number">5</button>
-        <button class = "number">6</button>
-        <button class = "number">7</button>
-        <button class = "number">8</button>
-        <button class = "number">9</button>
-        <button class = "operator" id = "add">+</button>
-        <button class = "operator" id = "subtract">-</button>
-        <button class = "operator" id = "multiply">x</button>
-        <button class = "operator" id = "divide">÷</button>
-        <button id = "equal">=</button>
-        <button id = "clear">clear</button>
+        <div class = "border">
+            <p class = "display"></p>
+            <div class = "num-and-operator">
+                <div class = "container-one">
+                    <button class = "number" id = "num-zero">0</button>
+                    <button id = "decimal">.</button>
+                    <button class = "number">1</button>
+                    <button class = "number">2</button>
+                    <button class = "number">3</button>
+                    <button class = "number">4</button>
+                    <button class = "number">5</button>
+                    <button class = "number">6</button>
+                    <button class = "number">7</button>
+                    <button class = "number">8</button>
+                    <button class = "number">9</button>
+                    <button class = "number" id = "clear">clear</button>
+                    <!-- <button class = "number" id = "backspace">bckspce</button> -->
+                    <button id = "percent">%</button>
+                    <button id = "sign">+/-</button>
+                </div>
+                <div class = "container-two">
+                    <button id = "equal">=</button>
+                    <button class = "operator" id = "add">+</button>
+                    <button class = "operator" id = "subtract">-</button>
+                    <button class = "operator" id = "multiply">x</button>
+                    <button class = "operator" id = "divide">÷</button>
+           
+            </div>
+        </div>
+        
+ 
 
+        </div>
+        
         <script src = "script.js"></script>
     </body>
 </html>

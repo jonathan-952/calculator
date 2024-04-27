@@ -1,0 +1,70 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.container-one {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+    width: 30vh;
+    /* outline: solid red 1px; */
+}
+
+.container-two {
+    display: flex;
+    flex-direction: column-reverse;
+    column-gap: 0;
+}
+.container-two > button, 
+.container-one > button {
+    width: 10vh;
+    font-size: 30px;
+}
+
+.number {
+    width: 10vh;
+    height: 10vh;
+}
+
+#decimal {
+    width: 10vh;
+    height: 10vh;
+}
+
+.border {
+    display: flex;
+    flex-direction: column;
+    outline: solid blue 2px;
+    flex: 0 0 auto;
+}
+
+.num-and-operator {
+    display: flex;
+    flex-direction: row;
+}
+
+.operator {
+    height: 10vh;
+    width: 10vh;
+}
+
+#num-zero {
+    width: 20vh;
+}
+
+.display {
+    height: 10vh;
+    width: 40vh;
+    outline: solid black 1px;
+    display: flex;
+    justify-content: right;
+    font-size: 60px;
+    align-items: end;
+}
+
+#equal {
+    height: 10vh;
+    width: 10vh;
+}
